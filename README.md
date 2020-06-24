@@ -4,3 +4,5 @@ This is project being part of [Become a Cloud Dev Ops Engineer](https://www.udac
 
 ## What was done here: 
 
+- Added demo Flask JokeAPI returning random jokes
+- Application was packed into Docker container
