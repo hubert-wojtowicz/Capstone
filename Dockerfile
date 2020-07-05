@@ -5,6 +5,7 @@ WORKDIR /app
 COPY src/app.py /app
 COPY requirements.txt /app
 
+# hadolint ignore=DL3013
 RUN pip install --upgrade pip &&\
     pip install --trusted-host pypi.python.org -r requirements.txt
 
