@@ -32,11 +32,16 @@ pipeline {
         }
         stage('lint') {
             steps {
-                echo 'Display basic information...'
-                sh """
-                    hadolint Dockerfile
-                    pylint --disable=R,C,W1203 src/app.py
-                """
+                echo 'Linting code...'
+                withPythonEnv('python3'){
+                    sh """
+                        which python3
+                    	pip install --upgrade pip &&\
+		                    pip install -r requirements.txt
+                        hadolint Dockerfile
+                        pylint --disable=R,C,W1203,RP0401 src/app.py
+                    """
+                }
             }
         }
         stage('contenerize') {
