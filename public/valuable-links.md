@@ -1,7 +1,13 @@
 # aimed
 [docker installation at ubuntu 18.04](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04)
+[docker hub login issue with premissions](https://www.digitalocean.com/community/questions/how-to-fix-docker-got-permission-denied-while-trying-to-connect-to-the-docker-daemon-socket)
 [eksctl configuration](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html)
 [update eksctl on linux](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux.html#cliv2-linux-upgrade)
+
+# configuration of python linting vevn
+
+[ShiningPanda for jenkins](https://plugins.jenkins.io/shiningpanda/)
+[withPythonEnv pipeline extension](https://www.jenkins.io/doc/pipeline/steps/pyenv-pipeline/#withpythonenv-code-block)
 
 # other
 https://aws.amazon.com/premiumsupport/knowledge-center/ec2-ssh-key-pair-regions/
