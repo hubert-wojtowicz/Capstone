@@ -8,6 +8,7 @@ pipeline {
         stage('sys-info') {
             steps {
                 echo 'Display basic information...'
+                echo "This is buuld number ${BUILD_NUMBER}"
                 sh """
                     pwd
                     which bash

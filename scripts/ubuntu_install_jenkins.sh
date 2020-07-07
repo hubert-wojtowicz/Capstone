@@ -29,3 +29,4 @@ sudo systemctl status jenkins
 # all following steps must be done manually, like unlocking jenkins, installing packages etc.
 
 sudo vim /var/lib/jenkins/secrets/initialAdminPassword #copy initial jenkins password
+

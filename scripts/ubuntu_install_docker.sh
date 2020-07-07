@@ -27,4 +27,7 @@ sudo apt install docker-ce
 sudo systemctl status docker
 
 # to avoid typing sudo whenever you run the docker command, add your username to the docker group
+sudo groupadd docker
+
 sudo usermod -aG docker ${USER}
+sudo usermod -aG docker jenkins
