@@ -15,11 +15,11 @@ pipeline {
                     ls -la    
                     git --version
                     
-                    #python3 --version
-                    #which python3
+                    python3 --version
+                    which python3
                     
-                    #pip3 --version
-                    #which pip3
+                    pip3 --version
+                    which pip3
                     
                     pylint --version
                     
