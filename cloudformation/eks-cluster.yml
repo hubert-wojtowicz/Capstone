@@ -1,0 +1,46 @@
+# ./create-stack.sh eks-cluster-capstone eks-cluster.yml
+# ./delete-stack.sh eks-cluster-capstone
+
+---
+AWSTemplateFormatVersion: 2010-09-09
+Description: Amazon EKS Cluster
+
+Parameters:
+    ClusterName:
+        Description: The default name for cluster control plane
+        Type: String
+        Default: "eks-cluster-capstone"
+        
+    InfraStackName:
+        Description: The default name for cluster network stack definition (VPC, Subnets, SecurityGroups)
+        Type: String
+        Default: "eks-infra-capstone"
+ 
+Resources:
+    myCluster:
+        Type: 'AWS::EKS::Cluster'
+        Properties:
+            Name: 
+                Ref: ClusterName
+            Version: '1.16'
+            RoleArn: >-
+                arn:aws:iam::406422950273:role/eks-cluster-manager-role
+            ResourcesVpcConfig:
+                SecurityGroupIds:
+                    Fn::Split:
+                        - ","
+                        - Fn::ImportValue:
+                            Fn::Sub:
+                                "${InfraStackName}-SecurityGroup"
+                SubnetIds:
+                    Fn::Split:
+                        - ","
+                        - Fn::ImportValue:
+                            Fn::Sub:
+                                "${InfraStackName}-SubnetIds"
+                                
+                                
+# follow this with setting up ~/.kube/config with command like
+# if experience error: "'NoneType' object is not iterable" delete current ~/.kube/config
+# https://github.com/aws/aws-cli/issues/4843
+# aws eks --region eu-west-2 update-kubeconfig --name eks-cluster-capstone

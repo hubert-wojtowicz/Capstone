@@ -5,6 +5,7 @@
 [update eksctl on linux](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux.html#cliv2-linux-upgrade)
 [cloudformation deployment of esk with nodes](https://medium.com/faun/create-your-first-application-on-aws-eks-kubernetes-cluster-874ee9681293)
 [cross cloudformation stacks references](https://aws.amazon.com/premiumsupport/knowledge-center/cloudformation-reference-resource/)
+[issue with setting up ~/.kube/config with aws cli](https://github.com/aws/aws-cli/issues/4843)
 
 # configuration of python linting vevn
 
