@@ -22,7 +22,7 @@ Resources:
         Properties:
             Name: 
                 Ref: ClusterName
-            Version: '1.16'
+            Version: '1.18'
             RoleArn: >-
                 arn:aws:iam::406422950273:role/eks-cluster-manager-role
             ResourcesVpcConfig:
