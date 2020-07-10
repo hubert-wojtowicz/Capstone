@@ -13,3 +13,11 @@ eksctl create cluster \
 --nodes-max 1 \
 --ssh-access=true \
 --ssh-public-key cluster4capstone.pub
+
+eksctl delete cluster --name cluster4capstone
+
+# configure kubectl for AWS EKS
+aws eks --region eu-west02 update-kubeconfig --name capstone
+
+# apply desired state over c
+kubectl apply -f ~/.kube/aws-auth-cm.yaml
