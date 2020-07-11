@@ -22,7 +22,7 @@ Resources:
         Properties:
             Name: 
                 Ref: ClusterName
-            Version: '1.18'
+            Version: '1.16'
             RoleArn: >-
                 arn:aws:iam::406422950273:role/eks-cluster-manager-role
             ResourcesVpcConfig:
@@ -39,7 +39,8 @@ Resources:
                             Fn::Sub:
                                 "${InfraStackName}-SubnetIds"
                                 
-                                
+# aws eks list-clusters
+# aws eks describe-cluster --name eks-cluster-capstone
 # follow this with setting up ~/.kube/config with command like
 # if experience error: "'NoneType' object is not iterable" delete current ~/.kube/config
 # https://github.com/aws/aws-cli/issues/4843
