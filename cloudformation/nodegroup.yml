@@ -1,5 +1,5 @@
-# ./create-stack.sh eks-cluster-nodegroup-capstone eks-nodegroup.yml
-# ./delete-stack.sh eks-cluster-nodegroup-capstone
+# ./create-stack.sh capstone-cluster-nodegroup nodegroup.yml
+# ./delete-stack.sh capstone-cluster-nodegroup
 
 ---
 AWSTemplateFormatVersion: 2010-09-09
