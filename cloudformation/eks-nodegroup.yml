@@ -14,7 +14,7 @@ Parameters:
   KeyName:
     Description: The EC2 Key Pair name to allow SSH access to the instances
     Type: AWS::EC2::KeyPair::KeyName
-    Default: cluster4capstone
+    Default: capstone
 
   NodeImageId:
     Description: AMI id for the node instances.
@@ -24,8 +24,7 @@ Parameters:
   NodeInstanceType:
     Description: EC2 instance type for the node instances
     Type: String
-    Default: t3.medium # 2vCPUs/4.0GB RAM/20% BasePerformance/5Gbps network
-
+    Default: t2.small #t3.medium # 2vCPUs/4.0GB RAM/20% BasePerformance/5Gbps network
     ConstraintDescription: Must be a valid EC2 instance type
     AllowedValues:
       - t2.small
