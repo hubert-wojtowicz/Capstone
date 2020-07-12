@@ -62,10 +62,10 @@ Outputs:
       Name: !Sub ${EnviromentName}-ClusterRoleArn
 
 # usefull following commands  
-# aws eks get-token --cluster-name eks-cluster-capstone
+# aws eks get-token --cluster-name Capstone-Cluster
 # aws eks list-clusters
-# aws eks describe-cluster --name eks-cluster-capstone
+# aws eks describe-cluster --name Capstone-Cluster
 # aws ec2 describe-security-groups --group-ids <sg-0b....>
-# aws eks --region eu-west-2 update-kubeconfig --name eks-cluster-capstone
+# aws eks --region eu-west-2 update-kubeconfig --name Capstone-Cluster
 # aws iam list-users
 # aws sts get-caller-identity
