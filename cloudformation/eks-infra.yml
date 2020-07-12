@@ -2,10 +2,14 @@
 # ./delete-stack.sh eks-infra-capstone
 ---
 AWSTemplateFormatVersion: '2010-09-09'
-Description: 'Amazon EKS VPC'
+Description: 'Amazon EKS VPC - Public subnets only'
 
 Parameters:
-
+  ClusterName:
+    Description: The default name for cluster control plane
+    Type: String
+    Default: "eks-cluster-capstone"
+        
   VpcBlock:
     Type: String
     Default: 192.168.0.0/16  # 192.168.0.0 - 192.168.255.255
@@ -52,7 +56,13 @@ Conditions:
         - ca-central-1
       - Fn::Equals:
         - {Ref: 'AWS::Region'}
-        - cn-north-1
+        - cn-north-
+      - Fn::Equals:
+        - {Ref: 'AWS::Region'}
+        - sa-east-1
+      - Fn::Equals:
+        - {Ref: 'AWS::Region'}
+        - us-west-1
 
   HasMoreThan2Azs:
     Fn::Not:
@@ -114,6 +124,10 @@ Resources:
       Tags:
       - Key: Name
         Value: !Sub "${AWS::StackName}-Subnet01"
+      - Key: "kubernetes.io/cluster/${ClusterName}"
+        Value: shared
+      - Key: kubernetes.io/role/elb
+        Value: 1
 
   Subnet02:
     Type: AWS::EC2::Subnet
@@ -133,6 +147,10 @@ Resources:
       Tags:
       - Key: Name
         Value: !Sub "${AWS::StackName}-Subnet02"
+      - Key: "kubernetes.io/cluster/${ClusterName}"
+        Value: shared
+      - Key: kubernetes.io/role/elb
+        Value: 1
 
   Subnet03:
     Condition: HasMoreThan2Azs
@@ -153,6 +171,10 @@ Resources:
       Tags:
       - Key: Name
         Value: !Sub "${AWS::StackName}-Subnet03"
+      - Key: "kubernetes.io/cluster/${ClusterName}"
+        Value: shared
+      - Key: kubernetes.io/role/elb
+        Value: 1
 
   Subnet01RouteTableAssociation:
     Type: AWS::EC2::SubnetRouteTableAssociation
