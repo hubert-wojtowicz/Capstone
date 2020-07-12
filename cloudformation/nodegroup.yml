@@ -6,6 +6,11 @@ AWSTemplateFormatVersion: 2010-09-09
 Description: Amazon EKS - Node Group
 
 Parameters:
+  EnviromentName:
+    Description: The default prefix for cluster components
+    Type: String
+    Default: Capstone
+    
   InfraStackName:
     Description: The default name for cluster network stack definition (VPC, Subnets, SecurityGroups)
     Type: String
@@ -143,31 +148,6 @@ Parameters:
     Description: Unique identifier for the Node Group.
     Type: String
     Default: eks-cluster-capstone-nodegroup
-    
-Metadata:
-
-  AWS::CloudFormation::Interface:
-    ParameterGroups: # group for better display in aws console
-      - Label:
-          default: EKS Cluster
-        Parameters:
-          - ClusterName
-      - Label:
-          default: Worker Node Configuration
-        Parameters:
-          - NodeGroupName
-          - NodeAutoScalingGroupMinSize
-          - NodeAutoScalingGroupDesiredCapacity
-          - NodeAutoScalingGroupMaxSize
-          - NodeInstanceType
-          - NodeImageId
-          - NodeVolumeSize
-          - KeyName
-          - BootstrapArguments
-      - Label:
-          default: Worker Network Configuration
-        Parameters:
-          - InfraStackName
 
 Resources:
   NodeInstanceProfile:
@@ -200,7 +180,7 @@ Resources:
       VpcId:
         Fn::ImportValue:
           Fn::Sub:
-            '${InfraStackName}-VpcId'
+            '${EnviromentName}-VpcId'
       Tags:
         - Key: !Sub kubernetes.io/cluster/${ClusterName}
           Value: owned
@@ -223,9 +203,7 @@ Resources:
       Description: Allow worker Kubelets and pods to receive communication from the cluster control plane
       GroupId: !Ref NodeSecurityGroup
       SourceSecurityGroupId: 
-        Fn::ImportValue:
-          Fn::Sub:
-            '${InfraStackName}-SecurityGroup'
+?????
       IpProtocol: tcp
       FromPort: 1025
       ToPort: 65535
