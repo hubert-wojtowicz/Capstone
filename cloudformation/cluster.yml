@@ -1,26 +1,22 @@
 # ./create-stack.sh capstone-cluster cluster.yml
 # ./delete-stack.sh capstone-cluster
 ---
-AWSTemplateFormatVersion: 2010-09-09
-Description: Amazon EKS Cluster
+Description: >
+  Amazon EKS Cluster with assigned managed Cluster Role
+  Part of Capstone project for Cloud DevOps Engineering Nanodegree
 
 Parameters:
-    ClusterName:
-        Description: The default name for cluster control plane
+    EnviromentName:
+        Description: The default prefix for cluster components
         Type: String
-        Default: "eks-cluster-capstone"
-        
-    InfraStackName:
-        Description: The default name for cluster network stack definition (VPC, Subnets, SecurityGroups)
-        Type: String
-        Default: "eks-infra-capstone"
+        Default: Capstone
  
 Resources:
-    EksClusterRole:
-        Type: 'AWS::IAM::Role'
+    ClusterRole:
+        Type: AWS::IAM::Role
         Properties:
           AssumeRolePolicyDocument:
-            Version: '2012-10-17'
+            Version: 2012-10-17
             Statement:
             - Effect: Allow
               Principal:
@@ -31,38 +27,40 @@ Resources:
           ManagedPolicyArns:
             - arn:aws:iam::aws:policy/AmazonEKSClusterPolicy
 
-    CreatedCluster:
-        Type: 'AWS::EKS::Cluster'
-        DependsOn: EksClusterRole
+    Cluster:
+        Type: AWS::EKS::Cluster
+        DependsOn: ClusterRole
         Properties:
-            Name: !Ref ClusterName
-            Version: '1.17'
-            RoleArn: !GetAtt EksClusterRole.Arn
+            Name: !Sub ${EnviromentName}-Cluster
+            Version: 1.17
+            RoleArn: !GetAtt ClusterRole.Arn
             ResourcesVpcConfig:
                 SecurityGroupIds:
                     Fn::Split:
                         - ","
                         - Fn::ImportValue:
                             Fn::Sub:
-                                "${InfraStackName}-SecurityGroup"
+                                ${EnviromentName}-ClusterControlPlaneSecurityGroup
                 SubnetIds:
                     Fn::Split:
                         - ","
                         - Fn::ImportValue:
                             Fn::Sub:
-                                "${InfraStackName}-SubnetIds"
+                                ${EnviromentName}-SubnetIds
 
 Outputs:
-  CreatedClusterName:
+  ClusterName:
     Description: Name of created cluster
-    Value: !Ref CreatedCluster
-    
-  RoleArn:
-    Description: The role that Amazon EKS will use to create AWS resources for Kubernetes clusters
-    Value: !GetAtt EksClusterRole.Arn
+    Value: !Ref Cluster
     Export:
-      Name: !Sub "${AWS::StackName}-RoleArn"
+      Name: !Sub ${EnviromentName}-ClusterName
     
+  ClusterRoleArn:
+    Description: The role that Amazon EKS will use to create AWS resources for Kubernetes clusters
+    Value: !GetAtt ClusterRole.Arn
+    Export:
+      Name: !Sub ${EnviromentName}-ClusterRoleArn
+
 # usefull following commands  
 # aws eks get-token --cluster-name eks-cluster-capstone
 # aws eks list-clusters

@@ -221,7 +221,7 @@ Outputs:
     Description: Security group for the cluster control plane communication with worker nodes
     Value: !Ref ControlPlaneSecurityGroup
     Export: 
-      Name: !Sub ${EnviromentName}-SecurityGroup
+      Name: !Sub ${EnviromentName}-ClusterControlPlaneSecurityGroup
       
   VpcId:
     Description: The VPC Id
