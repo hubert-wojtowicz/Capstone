@@ -1,4 +1,4 @@
-# ./create-stack.sh eks-cluster-capstone eks-cluster.yml
+    # ./create-stack.sh eks-cluster-capstone eks-cluster.yml
 # ./delete-stack.sh eks-cluster-capstone
 
 ---
@@ -22,7 +22,7 @@ Resources:
         Properties:
             Name: 
                 Ref: ClusterName
-            Version: '1.16'
+            Version: '1.17'
             RoleArn: >-
                 arn:aws:iam::406422950273:role/eks-cluster-manager-role
             ResourcesVpcConfig:
@@ -39,9 +39,12 @@ Resources:
                             Fn::Sub:
                                 "${InfraStackName}-SubnetIds"
                                 
+# aws eks get-token --cluster-name eks-cluster-capstone --role-arn arn:aws:iam::406422950273:role/eks-cluster-manager-role
 # aws eks list-clusters
 # aws eks describe-cluster --name eks-cluster-capstone
 # follow this with setting up ~/.kube/config with command like
 # if experience error: "'NoneType' object is not iterable" delete current ~/.kube/config
 # https://github.com/aws/aws-cli/issues/4843
-# aws eks --region eu-west-2 update-kubeconfig --name eks-cluster-capstone
+# aws eks --region eu-west-2 update-kubeconfig --name eks-cluster-capstone --role-arn arn:aws:iam::406422950273:role/eks-cluster-manager-role
+# aws iam list-users
+# aws sts get-caller-identity
