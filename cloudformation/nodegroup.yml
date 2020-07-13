@@ -293,7 +293,7 @@ Resources:
   NodeLaunchConfig:
     Type: AWS::AutoScaling::LaunchConfiguration
     Properties:
-      AssociatePublicIpAddress: true
+      #AssociatePublicIpAddress: true # do not set this - https://aws.amazon.com/blogs/containers/upcoming-changes-to-ip-assignment-for-eks-managed-node-groups/
       IamInstanceProfile: !Ref NodeInstanceProfile
       ImageId: !Ref NodeImageId
       InstanceType: !Ref NodeInstanceType
