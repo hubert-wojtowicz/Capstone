@@ -60,6 +60,10 @@ Outputs:
     Value: !GetAtt ClusterRole.Arn
     Export:
       Name: !Sub ${EnviromentName}-ClusterRoleArn
+      
+  ClusterEndpoint:
+    Description: Cluster Kubernetes API endpoint 
+    Value: !GetAtt Cluster.Endpoint
 
 # usefull following commands  
 # aws eks get-token --cluster-name Capstone-Cluster
