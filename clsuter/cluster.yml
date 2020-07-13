@@ -65,9 +65,8 @@ Outputs:
     Description: Cluster Kubernetes API endpoint 
     Value: !GetAtt Cluster.Endpoint
 
-# usefull following commands  
-# aws eks get-token --cluster-name Capstone-Cluster
-# aws eks list-clusters
+# docker run -it --rm -v ${PWD}:/work -w /work --entrypoint /bin/sh amazon/aws-cli:2.0.17
+# aws eks get-token --cluster-name Capstone-Clusterku
 # aws eks describe-cluster --name Capstone-Cluster
 # aws ec2 describe-security-groups --group-ids <sg-0b....>
 # aws eks --region eu-west-2 update-kubeconfig --name Capstone-Cluster
