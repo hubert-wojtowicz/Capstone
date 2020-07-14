@@ -1,14 +1,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: jokes-app-deployment
+  name: jokes-app-deploy
   labels:
     app: jokes-app
   annotations:
 spec:
   selector:
     matchLabels:
-      app: jokes-app-label
+      app: jokes-app
   replicas: 3
   strategy:
     type: RollingUpdate
@@ -18,7 +18,7 @@ spec:
   template:
     metadata:
       labels:
-        app: joke-app
+        app: jokes-app
     spec:
       containers:
       - name: jokes-app
