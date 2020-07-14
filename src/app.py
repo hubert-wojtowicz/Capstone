@@ -9,6 +9,10 @@ LOG.setLevel(logging.INFO)
 
 JOKE_API_URL = 'https://official-joke-api.appspot.com/random_joke'
 
+@app.route("/status")
+def status():
+    return "alive";
+
 @app.route("/joke")
 def home():
     r = requests.get(url = JOKE_API_URL) 
