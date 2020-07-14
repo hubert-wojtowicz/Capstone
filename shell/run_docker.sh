@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 appName="jokes-app"
-appContainerHostPort=8000
+appContainerHostPort=8080
 
 docker build --tag=$appName ..
 
