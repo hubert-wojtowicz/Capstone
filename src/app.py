@@ -11,7 +11,7 @@ JOKE_API_URL = 'https://official-joke-api.appspot.com/random_joke'
 
 @app.route("/status")
 def status():
-    return "alive";
+    return "alive"
 
 @app.route("/joke")
 def home():
