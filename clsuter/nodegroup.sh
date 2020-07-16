@@ -16,6 +16,7 @@ mv ./kubectl /usr/local/bin
 
 # create our role for nodes
 role_arn=$(aws iam create-role --role-name Capstone-eks-role-nodes --assume-role-policy-document file://assume-node-policy.json | jq .Role.Arn | sed s/\"//g)
+echo $role_ar
 role_arn=$(aws iam get-role --role-name Capstone-eks-role-nodes | jq .Role.Arn)
 aws iam attach-role-policy --role-name Capstone-eks-role-nodes --policy-arn  arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy
 aws iam attach-role-policy --role-name Capstone-eks-role-nodes --policy-arn  arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy
