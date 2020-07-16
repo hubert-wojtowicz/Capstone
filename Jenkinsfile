@@ -70,6 +70,13 @@ pipeline {
         stage('deploy') {
             steps {
                 echo 'Deploying....'
+                withAWS(region:'eu-west-2', credentials: 'aws-cli') {
+                    sh """
+                        aws eks --region eu-west-2 update-kubeconfig --name Capstone-Cluster
+                        ls
+                        kubectl apply -f ./**/deployment.yml
+                    """
+                }
             }
         }
     }
