@@ -74,7 +74,7 @@ pipeline {
                     sh """
                         aws eks --region eu-west-2 update-kubeconfig --name Capstone-Cluster
                         ls
-                        kubectl apply -f ./**/deployment.yml
+                        kubectl apply -f ./cluster/k8s-object/deployment.yml
                     """
                 }
             }
