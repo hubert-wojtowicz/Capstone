@@ -1,6 +1,3 @@
-# ./create-stack.sh capstone-infrastructure infrastructure.yml
-# ./delete-stack.sh capstone-infrastructure
----
 Description: >
   Amazon EKS VPC - Public subnets only approach - https://docs.aws.amazon.com/eks/latest/userguide/getting-started-console.html#only-public-subnets
   Infrastructure for EKS cluster deployment
