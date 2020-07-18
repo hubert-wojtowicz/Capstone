@@ -1,0 +1,112 @@
++ aws eks --region eu-west-2 update-kubeconfig --name Capstone-Cluster
+Updated context arn:aws:eks:eu-west-2:406422950273:cluster/Capstone-Cluster in /var/lib/jenkins/.kube/config
++ kubectl describe deployment/jokes-app-deploy
+Name:                   jokes-app-deploy
+Namespace:              default
+CreationTimestamp:      Sat, 18 Jul 2020 11:16:48 +0000
+Labels:                 app=jokes-app
+Annotations:            deployment.kubernetes.io/revision: 10
+                        kubectl.kubernetes.io/last-applied-configuration:
+                          {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app":"jokes-app"},"name":"jokes-app-deploy","namespace...
+Selector:               app=jokes-app
+Replicas:               4 desired | 4 updated | 4 total | 4 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  1 max unavailable, 0 max surge
+Pod Template:
+  Labels:  app=jokes-app
+  Containers:
+   jokes-app:
+    Image:      hubertos/jokes-app:1
+    Port:       8080/TCP
+    Host Port:  0/TCP
+    Limits:
+      cpu:     50m
+      memory:  64Mi
+    Requests:
+      cpu:        50m
+      memory:     64Mi
+    Liveness:     http-get http://:8080/status delay=10s timeout=1s period=3s #success=1 #failure=3
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    NewReplicaSetAvailable
+OldReplicaSets:  <none>
+NewReplicaSet:   jokes-app-deploy-6fb6f5f6d5 (4/4 replicas created)
+Events:
+  Type    Reason             Age                 From                   Message
+  ----    ------             ----                ----                   -------
+  Normal  ScalingReplicaSet  49m                 deployment-controller  Scaled down replica set jokes-app-deploy-85b8bff6f5 to 3
+  Normal  ScalingReplicaSet  49m                 deployment-controller  Scaled up replica set jokes-app-deploy-6975b6c78 to 1
+  Normal  ScalingReplicaSet  49m                 deployment-controller  Scaled down replica set jokes-app-deploy-85b8bff6f5 to 2
+  Normal  ScalingReplicaSet  49m                 deployment-controller  Scaled up replica set jokes-app-deploy-6975b6c78 to 2
+  Normal  ScalingReplicaSet  49m                 deployment-controller  Scaled down replica set jokes-app-deploy-85b8bff6f5 to 1
+  Normal  ScalingReplicaSet  49m                 deployment-controller  Scaled up replica set jokes-app-deploy-6975b6c78 to 3
+  Normal  ScalingReplicaSet  49m                 deployment-controller  Scaled up replica set jokes-app-deploy-6975b6c78 to 4
+  Normal  ScalingReplicaSet  49m                 deployment-controller  Scaled down replica set jokes-app-deploy-85b8bff6f5 to 0
+  Normal  ScalingReplicaSet  44m                 deployment-controller  Scaled down replica set jokes-app-deploy-6975b6c78 to 3
+  Normal  ScalingReplicaSet  32m (x2 over 100m)  deployment-controller  Scaled up replica set jokes-app-deploy-76d6dbb8b9 to 1
+  Normal  ScalingReplicaSet  32m                 deployment-controller  Scaled down replica set jokes-app-deploy-b9bd865d7 to 3
+  Normal  ScalingReplicaSet  32m                 deployment-controller  Scaled down replica set jokes-app-deploy-b9bd865d7 to 2
+  Normal  ScalingReplicaSet  25m (x23 over 81m)  deployment-controller  (combined from similar events): Scaled down replica set jokes-app-deploy-64df5855bf to 3
++ kubectl set image deployments/jokes-app-deploy jokes-app=hubertos/jokes-app:3
+deployment.apps/jokes-app-deploy image updated
++ kubectl describe deployment/jokes-app-deploy
+Name:                   jokes-app-deploy
+Namespace:              default
+CreationTimestamp:      Sat, 18 Jul 2020 11:16:48 +0000
+Labels:                 app=jokes-app
+Annotations:            deployment.kubernetes.io/revision: 11
+                        kubectl.kubernetes.io/last-applied-configuration:
+                          {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app":"jokes-app"},"name":"jokes-app-deploy","namespace...
+Selector:               app=jokes-app
+Replicas:               4 desired | 1 updated | 4 total | 3 available | 1 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  1 max unavailable, 0 max surge
+Pod Template:
+  Labels:  app=jokes-app
+  Containers:
+   jokes-app:
+    Image:      hubertos/jokes-app:3
+    Port:       8080/TCP
+    Host Port:  0/TCP
+    Limits:
+      cpu:     50m
+      memory:  64Mi
+    Requests:
+      cpu:        50m
+      memory:     64Mi
+    Liveness:     http-get http://:8080/status delay=10s timeout=1s period=3s #success=1 #failure=3
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    ReplicaSetUpdated
+OldReplicaSets:  jokes-app-deploy-6fb6f5f6d5 (3/3 replicas created)
+NewReplicaSet:   jokes-app-deploy-7455587779 (1/1 replicas created)
+Events:
+  Type    Reason             Age                 From                   Message
+  ----    ------             ----                ----                   -------
+  Normal  ScalingReplicaSet  49m                 deployment-controller  Scaled down replica set jokes-app-deploy-85b8bff6f5 to 3
+  Normal  ScalingReplicaSet  49m                 deployment-controller  Scaled up replica set jokes-app-deploy-6975b6c78 to 1
+  Normal  ScalingReplicaSet  49m                 deployment-controller  Scaled down replica set jokes-app-deploy-85b8bff6f5 to 2
+  Normal  ScalingReplicaSet  49m                 deployment-controller  Scaled up replica set jokes-app-deploy-6975b6c78 to 2
+  Normal  ScalingReplicaSet  49m                 deployment-controller  Scaled down replica set jokes-app-deploy-85b8bff6f5 to 1
+  Normal  ScalingReplicaSet  49m                 deployment-controller  Scaled up replica set jokes-app-deploy-6975b6c78 to 3
+  Normal  ScalingReplicaSet  49m                 deployment-controller  Scaled up replica set jokes-app-deploy-6975b6c78 to 4
+  Normal  ScalingReplicaSet  49m                 deployment-controller  Scaled down replica set jokes-app-deploy-85b8bff6f5 to 0
+  Normal  ScalingReplicaSet  44m                 deployment-controller  Scaled down replica set jokes-app-deploy-6975b6c78 to 3
+  Normal  ScalingReplicaSet  32m (x2 over 100m)  deployment-controller  Scaled up replica set jokes-app-deploy-76d6dbb8b9 to 1
+  Normal  ScalingReplicaSet  32m                 deployment-controller  Scaled down replica set jokes-app-deploy-b9bd865d7 to 3
+  Normal  ScalingReplicaSet  32m                 deployment-controller  Scaled down replica set jokes-app-deploy-b9bd865d7 to 2
+  Normal  ScalingReplicaSet  25m (x23 over 81m)  deployment-controller  (combined from similar events): Scaled down replica set jokes-app-deploy-64df5855bf to 3
+  Normal  ScalingReplicaSet  1s                  deployment-controller  Scaled down replica set jokes-app-deploy-6fb6f5f6d5 to 3
+  Normal  ScalingReplicaSet  1s                  deployment-controller  Scaled up replica set jokes-app-deploy-7455587779 to 1
